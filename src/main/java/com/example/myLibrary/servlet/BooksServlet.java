@@ -18,7 +18,13 @@ public class BooksServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        List<Book> all = bookManager.getAll();
+        String keyword = req.getParameter("keyword");
+        List<Book> all = null;
+        if (keyword == null || keyword.equals("")) {
+            all = bookManager.getAll();
+        }else{
+            all = bookManager.searchByTitle(keyword);
+        }
         req.setAttribute("books",all);
         req.getRequestDispatcher("WEB-INF/books.jsp").forward(req,resp);
     }

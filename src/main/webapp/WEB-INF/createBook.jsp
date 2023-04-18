@@ -9,7 +9,7 @@
 <body>
 <a href="/books">Back</a>
 <h2>Create Book</h2>
-<form action="/createBook" method="post">
+<form action="/createBook" method="post" enctype="multipart/form-data">
     title: <input type="text" name = "title"><br>
     description: <input type="text" name = "description"><br>
     price: <input type="text" name = "price"><br>
@@ -20,6 +20,7 @@
         <option value=<%=author.getId()%>><%=author.getName()%></option>
         <%}%>
     </select>
+    <input type="file" name="bookImage">
     <br>
     <input type="submit" value="create">
 </form>

@@ -2,6 +2,7 @@ package com.example.myLibrary.manager;
 
 
 import com.example.myLibrary.db.DBConnectionProvider;
+import com.example.myLibrary.model.Author;
 import com.example.myLibrary.model.User;
 import com.example.myLibrary.model.UserType;
 
@@ -72,4 +73,15 @@ public class UserManager {
                 .build();
     }
 
+    public User getById(int id) {
+        try (Statement statement = connection.createStatement()) {
+            ResultSet resultSet = statement.executeQuery("Select * from user where id = " + id);
+            if (resultSet.next()) {
+                return getUserFromResultSet(resultSet);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }
